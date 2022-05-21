@@ -15,6 +15,8 @@ type Cache struct {
 
 type MapCache map[string]Cache
 
+var ListCache []string
+
 func NewCache() Cache {
 
 	c := new(Cache)
@@ -51,19 +53,18 @@ func (c *Cache) Put(key, value string) {
 }
 
 func (c Cache) Keys() []string {
-	var listCache []string
+	// var listCache []string
 	fmt.Println("Get Time = ", time.Until(c.deadline).Milliseconds())
 	if time.Until(c.deadline).Milliseconds() <= 0 {
-		listCache = append(listCache, c.key)
+		ListCache = append(ListCache, c.key)
 	}
-	return listCache
+	return ListCache
 }
 
 func (c Cache) PutTill(key, value string, deadline time.Time) {
-	var listCache []string
 	if time.Until(deadline).Milliseconds() <= 0 {
-		listCache = append(listCache, c.key)
+		ListCache = append(ListCache, c.key)
 	}
-	fmt.Println("Keys = ", listCache)
+	fmt.Println("Keys = ", ListCache)
 
 }

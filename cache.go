@@ -22,7 +22,7 @@ func NewCache() Cache {
 }
 
 func (c Cache) Get(key string) (string, bool) {
-	k := c.key + ", " + c.value + ", " + c.stings
+	k := c.value
 	return k, c.dead
 }
 

@@ -25,7 +25,7 @@ func (c Cache) Get(key string) (string, bool) {
 	k := c.value
 	ok := c.dead
 	if k != key {
-		k = ""
+		k = key
 		ok = false
 	}
 	return k, ok

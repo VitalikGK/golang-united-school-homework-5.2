@@ -23,7 +23,8 @@ func NewCache() Cache {
 
 func (c Cache) Get(key string) (string, bool) {
 	k := c.value
-	return k, c.dead
+	ok := c.dead
+	return k, ok
 }
 
 func (c *Cache) Put(key, value string) {

@@ -52,9 +52,10 @@ func (c *Cache) Put(key, value string) {
 
 func (c Cache) Keys() []string {
 	var listCache []string
-	//	if c.deadline != time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC) {
-	listCache = append(listCache, c.key)
-	//	}
+	fmt.Println("Get Time = ", time.Until(c.deadline).Milliseconds())
+	if time.Until(c.deadline).Milliseconds() <= 0 {
+		listCache = append(listCache, c.key)
+	}
 	return listCache
 }
 

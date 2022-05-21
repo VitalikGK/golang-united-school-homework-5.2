@@ -15,7 +15,6 @@ type Cache struct {
 type MapCache map[string]Cache
 
 func NewCache(key, value, stings string, deadline time.Time, dead bool) Cache {
-
 	return Cache{
 		key:      key,
 		value:    value,

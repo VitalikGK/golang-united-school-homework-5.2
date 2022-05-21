@@ -55,14 +55,15 @@ func (c *Cache) Put(key, value string) {
 func (c Cache) Keys() []string {
 	// var listCache []string
 	fmt.Println("Get Time = ", time.Until(c.deadline).Milliseconds())
-	if time.Until(c.deadline).Milliseconds() <= 0 {
+	// for i := 0; i < len(ListCache); i++{
+	 if time.Until(c.deadline).Milliseconds() <= 0 {
 		ListCache = append(ListCache, c.key)
-	}
+	// }
 	return ListCache
 }
 
 func (c Cache) PutTill(key, value string, deadline time.Time) {
-	if time.Until(deadline).Milliseconds() <= 0 {
+	if c.deadline.Sub(deadline) > 0 {
 		ListCache = append(ListCache, c.key)
 	}
 	fmt.Println("Keys = ", ListCache)

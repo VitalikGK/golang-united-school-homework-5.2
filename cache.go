@@ -61,7 +61,7 @@ func (c Cache) Keys() []string {
 
 func (c Cache) PutTill(key, value string, deadline time.Time) {
 	var listCache []string
-	if c.deadline.Sub(deadline) >= 0 {
+	if time.Until(deadline).Milliseconds() <= 0 {
 		listCache = append(listCache, c.key)
 	}
 	fmt.Println("Keys = ", listCache)

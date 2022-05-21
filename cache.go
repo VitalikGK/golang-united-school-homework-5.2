@@ -22,10 +22,15 @@ func NewCache() Cache {
 }
 
 func (c Cache) Get(key string) (string, bool) {
-	k := c.value
-	ok := c.dead
-	if k != key {
-		k = ""
+	var k string
+	var ok bool
+	if c.key == key || c.deadline.Sub(time.Now()) >= 0 {
+
+		k = c.value
+		ok = true
+
+	} else {
+		k = key
 		ok = false
 	}
 	return k, ok
@@ -34,9 +39,9 @@ func (c Cache) Get(key string) (string, bool) {
 func (c *Cache) Put(key, value string) {
 	c.key = key
 	c.value = value
-	c.stings = time.Now().Format("Jan _2 15:04:05.000000")
-	c.deadline = time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC)
-	c.dead = false
+	// c.stings = time.Now().Format("Jan _2 15:04:05.000000")
+	// c.deadline = time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC)
+	// c.dead = false
 
 }
 

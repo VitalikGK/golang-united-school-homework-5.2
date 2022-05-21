@@ -1,6 +1,7 @@
 package cache
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -40,4 +41,13 @@ func (c Cache) Keys() []string {
 		listCache = append(listCache, c.key+", "+c.value+", "+c.stings+", "+c.deadline.Format("15:04:05"))
 	}
 	return listCache
+}
+
+func (c Cache) PutTill(key, value string, deadline time.Time) {
+	var listCache []string
+	if c.deadline.Sub(deadline) >= 0 {
+		listCache = append(listCache, c.key+", "+c.value+", "+c.stings+", "+c.deadline.Format("15:04:05"))
+	}
+	fmt.Println("Keys = ", listCache)
+
 }

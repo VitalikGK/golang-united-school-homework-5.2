@@ -36,7 +36,7 @@ func (m MapCache) Put(key, value string) {
 		k = NewCache()
 		k.key = key
 		k.value = value
-		k.stings = k.stings
+		k.stings = time.Now().Format("Jan _2 15:04:05.000000")
 		k.deadline = time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC)
 		k.dead = false
 		// fmt.Println("Изменили мапу ", key)

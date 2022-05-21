@@ -24,7 +24,8 @@ func NewCache() Cache {
 func (c Cache) Get(key string) (string, bool) {
 	var k string
 	var ok bool
-	if c.key == key || c.deadline.Sub(time.Now()) >= 0 {
+	fmt.Println("Get Time = ", time.Until(c.deadline).Milliseconds())
+	if c.key == key && time.Until(c.deadline).Milliseconds() <= 0 {
 
 		k = c.value
 		ok = true

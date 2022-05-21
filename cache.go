@@ -34,17 +34,10 @@ func (c *Cache) Put(key, value string) {
 
 }
 
-func (m MapCache) Keys() []string {
+func (c Cache) Keys() []string {
 	var listCache []string
-	for key, _ := range m {
-		k, ok := m[key]
-		if ok {
-			if k.deadline != time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC) {
-				listCache = append(listCache, k.key+", "+k.value+", "+k.stings+", "+k.deadline.Format("15:04:05"))
-			}
-		}
-
+	if c.deadline != time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC) {
+		listCache = append(listCache, c.key+", "+c.value+", "+c.stings+", "+c.deadline.Format("15:04:05"))
 	}
-	// fmt.Println("Keys = ", listCache)
 	return listCache
 }

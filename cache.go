@@ -25,7 +25,7 @@ func (c Cache) Get(key string) (string, bool) {
 	k := c.value
 	ok := c.dead
 	if k != key {
-		k = key
+		k = ""
 		ok = false
 	}
 	return k, ok
@@ -42,16 +42,16 @@ func (c *Cache) Put(key, value string) {
 
 func (c Cache) Keys() []string {
 	var listCache []string
-	if c.deadline != time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC) {
-		listCache = append(listCache, c.key+", "+c.value+", "+c.stings+", "+c.deadline.Format("15:04:05"))
-	}
+	//	if c.deadline != time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC) {
+	listCache = append(listCache, c.key)
+	//	}
 	return listCache
 }
 
 func (c Cache) PutTill(key, value string, deadline time.Time) {
 	var listCache []string
 	if c.deadline.Sub(deadline) >= 0 {
-		listCache = append(listCache, c.key+", "+c.value+", "+c.stings+", "+c.deadline.Format("15:04:05"))
+		listCache = append(listCache, c.key)
 	}
 	fmt.Println("Keys = ", listCache)
 

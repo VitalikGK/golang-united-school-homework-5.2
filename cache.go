@@ -6,67 +6,83 @@ import (
 )
 
 type Cache struct {
-	key      string
-	value    string
-	stings   string
-	deadline time.Time
-	dead     bool
+	kv       map[string]string
+	deadline map[string]time.Time
+	dead     map[string]bool
 }
 
-type MapCache map[string]Cache
+var KV map[string]string
+var DD map[string]time.Time
+var DaD map[string]bool
+
+//type MapCache map[string]Cache
 
 func NewCache() Cache {
-
-	c := new(Cache)
-	return *c
+	var kv Cache
+	return kv
 }
 
 func (c Cache) Get(key string) (string, bool) {
 	var k string
 	var ok bool
-	fmt.Println("Get Time = ", time.Until(c.deadline).Milliseconds())
-	if c.key == key && time.Until(c.deadline).Milliseconds() <= 0 {
-
-		k = c.value
-		ok = true
-
-	} else {
+	fmt.Println("Get Time = ", time.Until(DD[key]).Milliseconds())
+	_, exists := DD[key]
+	if !exists {
 		if k != key {
 			k = ""
 		} else {
 			k = key
 		}
 		ok = false
+	} else {
+
+		if time.Until(DD[key]).Milliseconds() <= 0 {
+
+			k = KV[key]
+			ok = true
+
+		}
+
 	}
 	return k, ok
 }
 
-func (c *Cache) Put(key, value string) {
-	c.key = key
-	c.value = value
-	// c.stings = time.Now().Format("Jan _2 15:04:05.000000")
-	// c.deadline = time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC)
-	// c.dead = false
+func (c Cache) Put(key, value string) {
+	fmt.Println("KV[key],  value", KV[key], value)
+	_, exists := DD[key]
+	if !exists {
+		//if KV[key] == key {
+		KV[key] = value
+		DD[key] = time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC)
+		DaD[key] = false
+		fmt.Println("Добавили Cache ", KV[key], DD[key], DaD[key])
+	} else {
+		KV[key] = value
+		DD[key] = time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC)
+		DaD[key] = false
+		fmt.Println("Изменили Cache ", KV[key], DD[key], DaD[key])
+	}
 
 }
 
 func (c Cache) Keys() []string {
-	var ListCache []string
-	// var listCache []string
-	//	fmt.Println("Get Time = ", time.Until(c.deadline).Milliseconds())
-	// for i := 0; i < len(ListCache); i++{
-	if time.Until(c.deadline).Milliseconds() <= 0 {
-		ListCache = append(ListCache, c.key)
+	var listCache []string
+	for i, key := range DD {
+		fmt.Println("Get Time = ", time.Until(key).Milliseconds())
+		if time.Until(key).Milliseconds() <= 0 {
+			listCache = append(listCache, i)
+		}
 	}
-	return ListCache
+	return listCache
 }
 
 func (c Cache) PutTill(key, value string, deadline time.Time) {
-	var ListCache []string
-	m := c.deadline
-	if m.Sub(deadline) <= 0 {
-		ListCache = append(ListCache, c.key)
+	var listCache []string
+	for i, key := range DD {
+		fmt.Println("PutTill Get Time = ", time.Until(key).Milliseconds())
+		if key.Sub(deadline) <= 0 {
+			listCache = append(listCache, i)
+		}
 	}
-	fmt.Println("Keys = ", ListCache)
-
+	fmt.Println("listcache = ", listCache)
 }

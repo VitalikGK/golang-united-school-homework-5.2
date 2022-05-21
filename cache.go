@@ -31,7 +31,11 @@ func (c Cache) Get(key string) (string, bool) {
 		ok = true
 
 	} else {
-		k = key
+		if k != key {
+			k = ""
+		} else {
+			k = key
+		}
 		ok = false
 	}
 	return k, ok

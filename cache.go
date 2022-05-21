@@ -20,14 +20,16 @@ func NewCache() Cache {
 	return *c
 }
 
-func (m MapCache) Get(key string) (string, bool) {
-	k, ok := m[key]
+func (c Cache) Get(key string) (string, bool) {
+	k := c.key + ", " + c.value + ", " + c.stings
+
+	//fmt.Println("Get () = ", k, c.dead)
 	// if !ok {
 	// 	fmt.Println("Элемента нет в списке")
 	// } else {
 	// 	fmt.Printf("Элемент найден (%s , %s, %s)", k.key, k.value, k.stings)
 	// }
-	return k.key + k.value + k.stings, ok
+	return k, c.dead
 }
 
 func (m MapCache) Put(key, value string) {

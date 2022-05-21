@@ -22,36 +22,15 @@ func NewCache() Cache {
 
 func (c Cache) Get(key string) (string, bool) {
 	k := c.key + ", " + c.value + ", " + c.stings
-
-	//fmt.Println("Get () = ", k, c.dead)
-	// if !ok {
-	// 	fmt.Println("Элемента нет в списке")
-	// } else {
-	// 	fmt.Printf("Элемент найден (%s , %s, %s)", k.key, k.value, k.stings)
-	// }
 	return k, c.dead
 }
 
-func (m MapCache) Put(key, value string) {
-	k, ok := m[key]
-	if ok {
-		k = NewCache()
-		k.key = key
-		k.value = value
-		k.stings = time.Now().Format("Jan _2 15:04:05.000000")
-		k.deadline = time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC)
-		k.dead = false
-		// fmt.Println("Изменили мапу ", key)
-	} else {
-		k = NewCache()
-		k.key = key
-		k.value = value
-		k.stings = time.Now().Format("Jan _2 15:04:05.000000")
-		k.deadline = time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC)
-		k.dead = false
-		// fmt.Println("Добавили мапу ", key)
-	}
-	m[key] = k
+func (c *Cache) Put(key, value string) {
+	c.key = key
+	c.value = value
+	c.stings = time.Now().Format("Jan _2 15:04:05.000000")
+	c.deadline = time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC)
+	c.dead = false
 
 }
 

@@ -13,12 +13,12 @@ type Cache struct {
 
 type MapCache map[string]Cache
 
-func NewCache(key, value, stings string, deadline time.Time) Cache {
+func NewCache(key, value string, deadline time.Time) Cache {
 
 	return Cache{
-		key:      key,
-		value:    value,
-		stings:   stings,
+		key:   key,
+		value: value,
+		//	stings:   stings,
 		deadline: deadline,
 	}
 }
@@ -36,10 +36,10 @@ func (m MapCache) Get(key string) (string, bool) {
 func (m MapCache) Put(key, value string) {
 	k, ok := m[key]
 	if ok {
-		k = NewCache(key, value, k.stings, time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC))
+		k = NewCache(key, value, time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC))
 		// fmt.Println("Изменили мапу ", key)
 	} else {
-		k = NewCache(key, value, time.Now().Format("Jan _2 15:04:05.000000"), time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC))
+		k = NewCache(key, value, time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC))
 		// fmt.Println("Добавили мапу ", key)
 	}
 	m[key] = k
@@ -52,7 +52,7 @@ func (m MapCache) Keys() []string {
 		k, ok := m[key]
 		if ok {
 			if k.deadline != time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC) {
-				listCache = append(listCache, k.key+", "+k.value+", "+k.stings+", "+k.deadline.Format("15:04:05"))
+				listCache = append(listCache, k.key+", "+k.stings+", "+k.deadline.Format("15:04:05"))
 			}
 		}
 

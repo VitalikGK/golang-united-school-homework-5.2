@@ -107,7 +107,7 @@ func (c Cache) PutTill(key, value string, deadline time.Time) {
 	} else {
 		c.Kv[key] = value
 		c.Ev[key] = value
-		c.Deadline[key] = time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC)
+		c.Deadline[key] = deadline
 		c.Dead[key] = false
 		fmt.Println("Изменили Cache ", c.Kv[key], c.Deadline[key], c.Dead[key])
 	}

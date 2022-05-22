@@ -95,18 +95,20 @@ func (c Cache) Keys() []string {
 }
 
 func (c Cache) PutTill(key, value string, deadline time.Time) {
-	var listCache []string
-	for i, key := range c.Deadline {
-		fmt.Println("PutTill Get Time = ", time.Until(key).Milliseconds())
-		fmt.Println("___________________________________________________________________________")
-		fmt.Println("Cache ", c)
-
-		fmt.Println("___________________________________________________________________________")
-		//		if key != time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC) {
-		if key.Sub(deadline) <= 0 || key.IsZero() {
-			listCache = append(listCache, i)
-		}
-		//		}
+	fmt.Println("c.Kv[key],  value", c.Kv[key], value)
+	_, exists := c.Deadline[key]
+	if !exists {
+		//if KV[key] == key {
+		c.Kv[key] = value
+		c.Ev[key] = value
+		c.Deadline[key] = deadline
+		c.Dead[key] = false
+		fmt.Println("Добавили Cache ", c.Kv[key], c.Deadline[key], c.Dead[key])
+	} else {
+		c.Kv[key] = value
+		c.Ev[key] = value
+		c.Deadline[key] = time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC)
+		c.Dead[key] = false
+		fmt.Println("Изменили Cache ", c.Kv[key], c.Deadline[key], c.Dead[key])
 	}
-	fmt.Println("listcache = ", listCache)
 }

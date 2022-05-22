@@ -81,7 +81,7 @@ func (c Cache) Put(key, value string) {
 func (c Cache) Keys() []string {
 	var listCache []string
 	for i, key := range c.Kv {
-		fmt.Println("Get Time = ", time.Until(key).Milliseconds())
+		fmt.Println("Get Time = ", time.Until(c.Deadline[i]).Milliseconds())
 		fmt.Println("Get Time key = ", key, i)
 		//if time.Until(key).Milliseconds() <= 0 {
 		//		if key != time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC) {

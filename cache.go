@@ -60,7 +60,7 @@ func (c Cache) Get(key string) (string, bool) {
 
 func (c Cache) Put(key, value string) {
 	fmt.Println("c.Kv[key],  value", c.Kv[key], value)
-	_, exists := c.Deadline[key]
+	_, exists := c.Kv[key]
 	if !exists {
 		//if KV[key] == key {
 		c.Kv[key] = value
@@ -100,7 +100,7 @@ func (c Cache) Keys() []string {
 
 func (c Cache) PutTill(key, value string, deadline time.Time) {
 	fmt.Println("c.Kv[key],  value", c.Kv[key], value)
-	_, exists := c.Deadline[key]
+	_, exists := c.Kv[key]
 	if !exists {
 		//if KV[key] == key {
 		c.Kv[key] = value

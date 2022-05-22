@@ -50,7 +50,7 @@ func (c Cache) Get(key string) (string, bool) {
 
 		} else {
 			//fmt.Println("c key value = ", key, c.Kv[key])
-			k = c.Kv[key]
+			k = "" //c.Kv[key]
 			ok = false
 
 		}

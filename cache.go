@@ -81,7 +81,7 @@ func (c Cache) Keys() []string {
 		fmt.Println("Cache ", c)
 
 		fmt.Println("___________________________________________________________________________")
-		if time.Until(key).Milliseconds() <= 0 && key.IsZero() {
+		if time.Until(key).Milliseconds() <= 0 || key.IsZero() {
 			listCache = append(listCache, i)
 			//			}
 		}
@@ -99,7 +99,7 @@ func (c Cache) PutTill(key, value string, deadline time.Time) {
 
 		fmt.Println("___________________________________________________________________________")
 		//		if key != time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC) {
-		if key.Sub(deadline) <= 0 && key.IsZero() {
+		if key.Sub(deadline) <= 0 || key.IsZero() {
 			listCache = append(listCache, i)
 		}
 		//		}

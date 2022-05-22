@@ -49,15 +49,7 @@ func (c Cache) Get(key string) (string, bool) {
 			ok = true
 
 		} else {
-			delete(c.Kv, key)
-			delete(c.Ev, key)
-			delete(c.Deadline, key)
-			delete(c.Dead, key)
-
-			k = ""
-			// } else {
-			// 	k = key
-			// }
+			k = c.Kv[key]
 			ok = false
 
 		}

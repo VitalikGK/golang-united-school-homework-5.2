@@ -7,6 +7,7 @@ import (
 
 type Cache struct {
 	Kv       map[string]string
+	Ev       map[string]string
 	Deadline map[string]time.Time
 	Dead     map[string]bool
 }
@@ -20,6 +21,7 @@ var DaD map[string]bool = make(map[string]bool)
 func NewCache() Cache {
 	c := Cache{
 		Kv:       make(map[string]string),
+		Ev:       make(map[string]string),
 		Deadline: make(map[string]time.Time),
 		Dead:     make(map[string]bool),
 	}
@@ -58,11 +60,13 @@ func (c Cache) Put(key, value string) {
 	if !exists {
 		//if KV[key] == key {
 		c.Kv[key] = value
+		c.Ev[key] = value
 		c.Deadline[key] = time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC)
 		c.Dead[key] = false
 		fmt.Println("Добавили Cache ", c.Kv[key], c.Deadline[key], c.Dead[key])
 	} else {
 		c.Kv[key] = value
+		c.Ev[key] = value
 		c.Deadline[key] = time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC)
 		c.Dead[key] = false
 		fmt.Println("Изменили Cache ", c.Kv[key], c.Deadline[key], c.Dead[key])

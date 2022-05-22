@@ -94,6 +94,10 @@ func (c Cache) PutTill(key, value string, deadline time.Time) {
 	var listCache []string
 	for i, key := range c.Deadline {
 		fmt.Println("PutTill Get Time = ", time.Until(key).Milliseconds())
+		fmt.Println("___________________________________________________________________________")
+		fmt.Println("Cache ", c)
+
+		fmt.Println("___________________________________________________________________________")
 		//		if key != time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC) {
 		if key.Sub(deadline) <= 0 && !c.Dead[i] {
 			listCache = append(listCache, i)

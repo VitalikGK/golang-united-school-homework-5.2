@@ -48,6 +48,10 @@ func (c Cache) Get(key string) (string, bool) {
 			k = c.Kv[key]
 			ok = true
 
+		} else {
+			k = c.Kv[key]
+			ok = false
+
 		}
 
 	}
@@ -76,7 +80,7 @@ func (c Cache) Put(key, value string) {
 
 func (c Cache) Keys() []string {
 	var listCache []string
-	for i, key := range c.Deadline {
+	for i, key := range c.Kv {
 		fmt.Println("Get Time = ", time.Until(key).Milliseconds())
 		fmt.Println("Get Time key = ", key, i)
 		//if time.Until(key).Milliseconds() <= 0 {
@@ -85,7 +89,7 @@ func (c Cache) Keys() []string {
 		fmt.Println("Cache ", c)
 
 		fmt.Println("___________________________________________________________________________")
-		if time.Until(key).Milliseconds() <= 0 || key.IsZero() {
+		if time.Until(c.Deadline[key]).Milliseconds() <= 0 || c.Deadline[key].IsZero() {
 			listCache = append(listCache, i)
 			//			}
 		}

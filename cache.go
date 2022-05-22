@@ -77,7 +77,7 @@ func (c Cache) Keys() []string {
 		fmt.Println("Get Time key = ", key, i)
 		//if time.Until(key).Milliseconds() <= 0 {
 		//		if key != time.Date(1, time.January, 1, 00, 0, 0, 0, time.UTC) {
-		if time.Until(key).Milliseconds() <= 0 && c.Dead[i] == false {
+		if key.Sub(time.Now()) <= 0 && c.Dead[i] == false { //time.Until(key).Milliseconds()
 			listCache = append(listCache, i)
 			//			}
 		}

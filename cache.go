@@ -43,13 +43,13 @@ func (c Cache) Get(key string) (string, bool) {
 		ok = false
 	} else {
 
-		if time.Until(c.Deadline[key]).Milliseconds() <= 0 || c.Deadline[key].IsZero() {
+		if time.Until(c.Deadline[key]).Milliseconds() >= 0 || c.Deadline[key].IsZero() {
 
 			k = c.Kv[key]
 			ok = true
 
 		} else {
-			fmt.Println("c key value = ", key, c.Kv[key])
+			//fmt.Println("c key value = ", key, c.Kv[key])
 			k = c.Kv[key]
 			ok = false
 

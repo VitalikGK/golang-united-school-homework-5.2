@@ -49,6 +49,7 @@ func (c Cache) Get(key string) (string, bool) {
 			ok = true
 
 		} else {
+			fmt.Println("c key value = ", key, c.Kv[key])
 			k = c.Kv[key]
 			ok = false
 

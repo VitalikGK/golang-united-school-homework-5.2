@@ -89,7 +89,7 @@ func (c Cache) Keys() []string {
 		fmt.Println("Cache ", c)
 
 		fmt.Println("___________________________________________________________________________")
-		if time.Until(c.Deadline[i]).Milliseconds() <= 0 || c.Deadline[i].IsZero() {
+		if time.Until(c.Deadline[i]).Milliseconds() >= 0 || c.Deadline[i].IsZero() {
 			listCache = append(listCache, i)
 			//			}
 		}

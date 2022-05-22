@@ -6,9 +6,9 @@ import (
 )
 
 type Cache struct {
-	kv       map[string]string
-	deadline map[string]time.Time
-	dead     map[string]bool
+	Kv       map[string]string
+	Deadline map[string]time.Time
+	Dead     map[string]bool
 }
 
 var KV map[string]string
@@ -18,8 +18,13 @@ var DaD map[string]bool
 //type MapCache map[string]Cache
 
 func NewCache() Cache {
-	var kv Cache
-	return kv
+	c := Cache{
+		Kv:       make(map[string]string),
+		Deadline: make(map[string]time.Time),
+		Dead:     make(map[string]bool),
+	}
+
+	return c
 }
 
 func (c Cache) Get(key string) (string, bool) {

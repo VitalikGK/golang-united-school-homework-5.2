@@ -11,9 +11,9 @@ type Cache struct {
 	Dead     map[string]bool
 }
 
-var KV map[string]string
-var DD map[string]time.Time
-var DaD map[string]bool
+var KV map[string]string = make(map[string]string)
+var DD map[string]time.Time = make(map[string]time.Time)
+var DaD map[string]bool = make(map[string]bool)
 
 //type MapCache map[string]Cache
 

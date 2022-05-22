@@ -49,7 +49,7 @@ func (c Cache) Get(key string) (string, bool) {
 			ok = true
 
 		} else {
-			k = ""
+			k = c.Kv[key]
 			ok = false
 
 		}

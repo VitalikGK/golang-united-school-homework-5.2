@@ -49,9 +49,15 @@ func (c Cache) Get(key string) (string, bool) {
 			ok = true
 
 		} else {
-			//fmt.Println("c key value = ", key, c.Kv[key])
+			fmt.Println("c key value = ", key, c.Kv[key])
 			k = "" //c.Kv[key]
 			ok = false
+			delete(c.Kv, key)
+			delete(c.Ev, key)
+			delete(c.Deadline, key)
+			delete(c.Dead, key)
+
+			fmt.Println("c value после удаления = ", c)
 
 		}
 

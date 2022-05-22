@@ -35,17 +35,17 @@ func (c Cache) Get(key string) (string, bool) {
 	fmt.Println("Get Time = ", time.Until(c.Deadline[key]).Milliseconds())
 	_, exists := c.Deadline[key]
 	if !exists {
-		if k != key {
-			k = ""
-		} else {
-			k = key
-		}
+		// if k != key {
+		k = ""
+		// } else {
+		// 	k = key
+		// }
 		ok = false
 	} else {
 
-		if time.Until(c.Deadline[key]).Milliseconds() <= 0 {
+		if time.Until(c.Deadline[key]).Milliseconds() <= 0 || c.Deadline[key].IsZero() {
 
-			k = c.Kv[key]
+			k = c.Ev[key]
 			ok = true
 
 		}
